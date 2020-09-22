@@ -32,8 +32,6 @@ describe('OrderForm Component', () => {
 		expect(await findByText(/order: beans, hot sauce/i)).toBeInTheDocument
 		fireEvent.click(lettuceButton)
 		expect(await findByText(/order: beans, hot sauce, lettuce/i)).toBeInTheDocument
-
-		
 	})
 
 	it('Should fire the correct method when submit order clicked', () => {
