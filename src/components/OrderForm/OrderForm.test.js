@@ -53,6 +53,15 @@ describe('OrderForm Component', () => {
 		expect(submitOrder).toBeCalledTimes(0)
 	})
 
+	it('Should give warning if submitted without name or ingredients', () => {
+		const submitOrder = jest.fn()
+		render(<OrderForm submitOrder={submitOrder} />)
+		const submitButton = screen.getByRole('button', { name: /submit order/i })
+		fireEvent.click(submitButton)
+		const warningMessage = screen.getByText(/please make sure you/i)
+		expect(warningMessage).toBeInTheDocument()
+	})
+
 	it('Should clear the input when submit button clicked', async () => {
 		const submitOrder = jest.fn()
 		render(<OrderForm submitOrder={submitOrder} />)
