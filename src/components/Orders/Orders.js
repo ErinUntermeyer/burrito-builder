@@ -1,5 +1,5 @@
-import React from 'react';
-import './Orders.css';
+import React from 'react'
+import './Orders.css'
 
 const Orders = ({ orders }) => {
   const orderEls = orders.map(order => {
@@ -14,7 +14,7 @@ const Orders = ({ orders }) => {
         </ul>
       </div>
     )
-  });
+  })
 
   return (
     <section>
@@ -23,4 +23,4 @@ const Orders = ({ orders }) => {
   )
 }
 
-export default Orders;
+export default Orders

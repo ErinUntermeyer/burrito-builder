@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import './App.css';
-import {getOrders} from '../../apiCalls';
-import Orders from '../../components/Orders/Orders';
-import OrderForm from '../../components/OrderForm/OrderForm';
+import React, { Component } from 'react'
+import './App.css'
+import {getOrders} from '../../apiCalls'
+import Orders from '../../components/Orders/Orders'
+import OrderForm from '../../components/OrderForm/OrderForm'
 
 class App extends Component {
   constructor() {
-		super();
+		super()
 		this.state = {
 			orders: []
 		}
@@ -17,7 +17,7 @@ class App extends Component {
 			.then(data => {
 				this.setState({ orders: data.orders })
 			})
-      .catch(err => console.error('Error fetching:', err));
+      .catch(err => console.error('Error fetching:', err))
   }
 
   render() {
@@ -29,9 +29,9 @@ class App extends Component {
         </header>
         <Orders orders={this.state.orders}/>
       </main>
-    );
+    )
   }
 }
 
 
-export default App;
+export default App
