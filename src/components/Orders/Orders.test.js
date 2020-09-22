@@ -21,4 +21,10 @@ describe('Orders Component', () => {
 		expect(order1).toBeInTheDocument()
 	})
 
+	it('Should have an delete button', () => {
+		render(<Orders orders={mockedOrder} removeOrder={jest.fn()} />)
+		const deleteButton = screen.getByRole('button', { name: /delete/i })
+		expect(deleteButton).toBeInTheDocument()
+	})
+
 })
