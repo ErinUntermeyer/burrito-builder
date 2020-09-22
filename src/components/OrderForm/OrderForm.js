@@ -11,6 +11,7 @@ class OrderForm extends Component {
 
 
   handleSubmit = e => {
+		e.preventDefault()
 		if (this.state.name !== '' && this.state.ingredients.length > 0) {
 			this.props.submitOrder(this.state.name, this.state.ingredients)
 		}

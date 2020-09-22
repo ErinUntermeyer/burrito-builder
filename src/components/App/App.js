@@ -20,9 +20,10 @@ class App extends Component {
       .catch(err => console.error('Error fetching:', err))
 	}
 	
-	submitOrder(name, ingredients) {
+	submitOrder = (name, ingredients) => {
 		postOrder(name, ingredients)
 			.then(order => {
+				console.log(order)
 				this.setState({ orders: [...this.state.orders, order] })
 			})
 			.catch(err => console.error('Error fetching:', err))
