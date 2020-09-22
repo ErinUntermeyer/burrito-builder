@@ -9,7 +9,7 @@ jest.mock('../../apiCalls')
 describe('OrderForm Component', () => {
 
 	it('Should render a form', () => {
-		render(<OrderForm />)
+		render(<OrderForm submitOrder={jest.fn()}/>)
 		const input = screen.getByRole('textbox')
 		const button = screen.getByRole('button', { name: /beans/i })
 		expect(input).toBeInTheDocument()
@@ -17,7 +17,7 @@ describe('OrderForm Component', () => {
 	})
 
 	it('Should capture name input', async () => {
-		const { findByDisplayValue } = render(<OrderForm />)
+		const { findByDisplayValue } = render(<OrderForm submitOrder={jest.fn()}/>)
 		const nameInput = screen.getByPlaceholderText(/name/i)
 		expect(nameInput).toBeInTheDocument()
 		fireEvent.change(nameInput, { target: { value: 'Erin' } })
@@ -25,7 +25,7 @@ describe('OrderForm Component', () => {
 	})
 
 	it('Should capture ingredients as buttons are clicked', async () => {
-		const { findByText } = render(<OrderForm />)
+		const { findByText } = render(<OrderForm submitOrder={jest.fn()}/>)
 		const beansButton = screen.getByRole('button', { name: /beans/i })
 		const hotSauceButton = screen.getByRole('button', { name: /hot sauce/i })
 		const lettuceButton = screen.getByRole('button', { name: /lettuce/i })
@@ -40,7 +40,14 @@ describe('OrderForm Component', () => {
 	})
 
 	it('Should fire the correct method when submit order clicked', () => {
-
+		const submitOrder = jest.fn()
+		render(<OrderForm submitOrder={submitOrder}/>)
+		const nameInput = screen.getByPlaceholderText(/name/i)
+		fireEvent.change(nameInput, { target: { value: 'Erin' } })
+		fireEvent.click(screen.getByRole('button', { name: /beans/i }))
+		const submitButton = screen.getByRole('button', { name: /submit order/i })
+		fireEvent.click(submitButton)
+		expect(submitOrder).toBeCalledTimes(1)
 	})
 
 	it('Should not allow an order to be submitted without name and ingredients', () => {
