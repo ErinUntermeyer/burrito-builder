@@ -1,7 +1,7 @@
 
 import React from 'react'
 import OrderForm from './OrderForm'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, findByDisplayValue } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { getOrders, postOrder } from '../../apiCalls'
 jest.mock('../../apiCalls')
@@ -56,6 +56,17 @@ describe('OrderForm Component', () => {
 		const submitButton = screen.getByRole('button', { name: /submit order/i })
 		fireEvent.click(submitButton)
 		expect(submitOrder).toBeCalledTimes(0)
+	})
+
+	it('Should clear the input when submit button clicked', async () => {
+		const submitOrder = jest.fn()
+		render(<OrderForm submitOrder={submitOrder} />)
+		const nameInput = screen.getByPlaceholderText(/name/i)
+		fireEvent.change(nameInput, { target: { value: 'Howard' } })
+		fireEvent.click(screen.getByRole('button', { name: /lettuce/i }))
+		const submitButton = screen.getByRole('button', { name: /submit order/i })
+		fireEvent.click(submitButton)
+		expect(screen.queryByDisplayValue(/howard/i)).not.toBeInTheDocument()
 	})
 
 })
