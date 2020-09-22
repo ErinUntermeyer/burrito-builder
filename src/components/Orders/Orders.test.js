@@ -27,4 +27,12 @@ describe('Orders Component', () => {
 		expect(deleteButton).toBeInTheDocument()
 	})
 
+	it('Should fire the correct method when delete button clicked', () => {
+		const removeOrder = jest.fn()
+		render(<Orders orders={mockedOrder} removeOrder={removeOrder} />)
+		const deleteButton = screen.getByRole('button', { name: /delete/i })
+		fireEvent.click(deleteButton)
+		expect(removeOrder).toBeCalledTimes(1)
+	})
+
 })
