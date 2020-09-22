@@ -5,13 +5,17 @@ class OrderForm extends Component {
     super(props)
     this.state = {
       name: '',
-      ingredients: []
+			ingredients: [],
+			warning: ''
     }
   }
 
 
   handleSubmit = e => {
 		e.preventDefault()
+		if (this.state.name === '' || this.state.ingredients.length === 0 ) {
+			this.setState({ warning: 'Please make sure you have entered your name and at least one ingredient' })
+		}
 		if (this.state.name !== '' && this.state.ingredients.length > 0) {
 			this.props.submitOrder(this.state.name, this.state.ingredients)
 		}
@@ -57,6 +61,8 @@ class OrderForm extends Component {
 
         <p>Order: { this.state.ingredients.join(', ') || 'Nothing selected' }</p>
 
+				{this.state.warning && <p>{this.state.warning}</p>}
+				
         <button onClick={e => this.handleSubmit(e)}>
           Submit Order
         </button>
