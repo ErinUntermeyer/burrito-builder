@@ -17,7 +17,11 @@ describe('OrderForm Component', () => {
 	})
 
 	it('Should capture name input', async () => {
-
+		const { findByDisplayValue } = render(<OrderForm />)
+		const nameInput = screen.getByPlaceholderText(/name/i)
+		expect(nameInput).toBeInTheDocument()
+		fireEvent.change(nameInput, { target: { value: 'Erin' } })
+		expect(await findByDisplayValue(/erin/i)).toBeInTheDocument()
 	})
 
 	it('Should capture ingredients as buttons are clicked', () => {
