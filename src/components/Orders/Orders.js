@@ -3,7 +3,6 @@ import './Orders.css'
 
 const Orders = ({ orders }) => {
   const orderEls = orders.map(order => {
-		console.log(order)
     return (
       <div className="order" key={order.id}>
         <h3>{order.name}</h3>

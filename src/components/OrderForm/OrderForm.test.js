@@ -1,10 +1,7 @@
-
 import React from 'react'
 import OrderForm from './OrderForm'
-import { render, screen, fireEvent, findByDisplayValue } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { getOrders, postOrder } from '../../apiCalls'
-jest.mock('../../apiCalls')
 
 describe('OrderForm Component', () => {
 
