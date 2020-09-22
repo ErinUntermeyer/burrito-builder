@@ -23,7 +23,6 @@ class App extends Component {
 	submitOrder = (name, ingredients) => {
 		postOrder(name, ingredients)
 			.then(order => {
-				console.log(order)
 				this.setState({ orders: [...this.state.orders, order] })
 			})
 			.catch(err => console.error('Error fetching:', err))
