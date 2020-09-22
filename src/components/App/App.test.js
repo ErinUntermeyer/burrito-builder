@@ -46,6 +46,13 @@ describe('App Component', () => {
 		expect(order3title).toBeInTheDocument()
 	})
 
+	it('Should display error if get request fails', async () => {
+		getOrders.mockRejectedValueOnce([404])
+		const { findByRole } = render(<App />)
+		const errorMessage = await findByRole('heading', { name: /oh no, something went wrong!/i })
+		expect(errorMessage).toBeInTheDocument()
+	})
+
 	it('Should allow a user to post a new order', async () => {
 		getOrders.mockResolvedValue({orders: []})
 		postOrder.mockResolvedValue(mockedPost)

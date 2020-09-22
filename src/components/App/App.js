@@ -8,7 +8,8 @@ class App extends Component {
   constructor() {
 		super()
 		this.state = {
-			orders: []
+			orders: [],
+			error: ''
 		}
   }
 
@@ -17,7 +18,9 @@ class App extends Component {
 			.then(data => {
 				this.setState({ orders: data.orders })
 			})
-      .catch(err => console.error('Error fetching:', err))
+			.catch(err => {
+				this.setState({ error: 'Oh no, something went wrong!' })
+			})
 	}
 	
 	submitOrder = (name, ingredients) => {
@@ -42,6 +45,7 @@ class App extends Component {
           <h1>Burrito Builder</h1>
           <OrderForm submitOrder={this.submitOrder}/>
         </header>
+				{this.state.error && <h2>{this.state.error}</h2>}
         <Orders orders={this.state.orders} removeOrder={this.removeOrder}/>
       </main>
     )
