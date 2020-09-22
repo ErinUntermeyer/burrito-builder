@@ -1,7 +1,7 @@
 import React from 'react'
 import './Orders.css'
 
-const Orders = ({ orders }) => {
+const Orders = ({ orders, removeOrder }) => {
   const orderEls = orders.map(order => {
     return (
       <div className="order" key={order.id}>
@@ -11,6 +11,7 @@ const Orders = ({ orders }) => {
             return <li key={Math.random() * 5}>{ingredient}</li>
           })}
         </ul>
+				<button onClick={(e) => removeOrder(order.id)}>Delete</button>
       </div>
     )
   })
