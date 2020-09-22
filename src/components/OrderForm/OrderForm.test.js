@@ -51,7 +51,11 @@ describe('OrderForm Component', () => {
 	})
 
 	it('Should not allow an order to be submitted without name and ingredients', () => {
-
+		const submitOrder = jest.fn()
+		render(<OrderForm submitOrder={submitOrder} />)
+		const submitButton = screen.getByRole('button', { name: /submit order/i })
+		fireEvent.click(submitButton)
+		expect(submitOrder).toBeCalledTimes(0)
 	})
 
 })
